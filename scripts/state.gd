@@ -9,7 +9,7 @@ var last_mouse_pos = Vector2.ZERO
 func is_mouse_over() -> bool:
 	var mouse = to_local(get_global_mouse_position())
 	
-	return mouse.x > -40 and mouse.x < 40 and mouse.y > -40 and mouse.y < 40
+	return mouse.x > 0 and mouse.x < 80 and mouse.y > 0 and mouse.y < 80
 
 func _input(event):
 	# LEFT MOUSE BUTTON
@@ -36,7 +36,7 @@ func _input(event):
 func _ready() -> void:
 	print(is_mouse_over())
 	$Label.text = state_name
-	get_tree().get_first_node_in_group("camera").block_pan = false
+	#get_tree().get_first_node_in_group("camera").block_pan = false
 	print(get_tree_string())
 
 

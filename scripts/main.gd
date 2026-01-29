@@ -2,6 +2,7 @@ extends Control
 
 @export var state_scene: PackedScene
 var state_count := 0
+@onready var canvas: Control = $EditorRoot/Canvas
 
 func _on_add_state_button_pressed():
 	print("add button pressed")
@@ -16,7 +17,17 @@ func _on_add_state_button_pressed():
 func _ready() -> void:
 	print("Main ready")
 
-
+			
+			
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _process(_delta: float) -> void:
+		# Scroll → zoom
+	if not Input.is_action_pressed("shift"):
+		if Input.is_action_pressed("Up"):
+			canvas.position.y-= 10
+		if Input.is_action_pressed("Down"):
+			canvas.position.y+= 10
+	if Input.is_action_pressed("Right"):
+		canvas.position.x+= 10
+	if Input.is_action_pressed("Left"):
+		canvas.position.x-= 10
