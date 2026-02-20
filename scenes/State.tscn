@@ -4,6 +4,7 @@
 
 [node name="State" type="Node2D"]
 script = ExtResource("1_i7u5s")
+state_name = null
 
 [node name="Circle" type="ColorRect" parent="."]
 offset_right = 80.0

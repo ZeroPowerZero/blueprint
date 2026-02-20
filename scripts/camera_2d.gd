@@ -1,6 +1,6 @@
 extends Camera2D
 
-var draging := false
+var draging := true
 var last_mouse_pos := Vector2.ZERO
 var block_pan := false
 
@@ -14,14 +14,14 @@ func _input(event):
 			else:
 				draging = false
 		
-		if draging:
+		
+	if event.is_action_pressed("drag"):
 			print("hello dragg")
 			var _delta = get_global_mouse_position() - last_mouse_pos
 			position -= _delta * zoom
 			last_mouse_pos = get_global_mouse_position()
-		else :
-			last_mouse_pos = Vector2(0,0)
-			
+	else :
+		last_mouse_pos = Vector2(0,0)		
 	# Middle mouse drag → pan
 	if event is InputEventMouseButton  :
 		#if event.button_index == MOUSE_BUTTON_MIDDLE:
