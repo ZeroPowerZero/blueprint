@@ -9,10 +9,14 @@ var final_state = null
 @onready var canvas: Control = $EditorRoot/Canvas
 @onready var editor_root: Node2D = $EditorRoot
 
-#UI
+#UI-vbox-contation for transition
 @onready var from_state: LineEdit = $CanvasLayer/UI/VBoxContainer/from_state
 @onready var to_state: LineEdit = $CanvasLayer/UI/VBoxContainer/to_state
 @onready var input_symbol: LineEdit = $CanvasLayer/UI/VBoxContainer/input_symbol
+
+#input workign container
+@onready var input_string: LineEdit = $CanvasLayer/UI/Input_working_container/Input_string
+@onready var validation_button: Button = $CanvasLayer/UI/Input_working_container/validation_button
 
 
 func _on_add_state_button_pressed():
@@ -94,3 +98,28 @@ func draw_transition(from_node, to_node, symbol):
 	canvas.add_child(transition)
 	
 	transition.setup(from_node, to_node, symbol)
+
+
+func _on_validation_button_pressed() -> void:
+	var input = input_string.text.strip_edges()
+	
+	if states.size() == 0:
+		print("No states")
+		return
+	
+	var current_state = states[0]   # q0
+	
+	print("Start at:", current_state.state_name)
+	
+	for char in input:
+		if current_state.transitions.has(char):
+			current_state = current_state.transitions[char]
+			print("Move to:", current_state.state_name)
+		else:
+			print("Rejected (missing transition)")
+			return
+	
+	if current_state.is_accepting:
+		print("ACCEPTED ")
+	else:
+		print("REJECTED ")

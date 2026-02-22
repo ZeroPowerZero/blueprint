@@ -40,7 +40,7 @@ func update_curve():
 	label.position = mid + offset
 	label.scale = Vector2(2,2)
 	
-	queue_redraw()   # 🔥 needed for arrow
+	queue_redraw()   
 
 
 func _draw():
