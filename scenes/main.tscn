@@ -51,6 +51,21 @@ theme_override_colors/font_color = Color(0.98359627, 0.84209883, 0.7660637, 1)
 theme_override_colors/icon_normal_color = Color(0.2231029, 0.2231029, 0.22310287, 1)
 text = "add transition"
 
+[node name="Input_working_container" type="VBoxContainer" parent="CanvasLayer/UI"]
+layout_mode = 0
+offset_left = 6.0
+offset_top = 379.0
+offset_right = 194.0
+offset_bottom = 475.0
+
+[node name="Input_string" type="LineEdit" parent="CanvasLayer/UI/Input_working_container"]
+layout_mode = 2
+placeholder_text = "enter input string"
+
+[node name="validation_button" type="Button" parent="CanvasLayer/UI/Input_working_container"]
+layout_mode = 2
+text = "check validation"
+
 [node name="EditorRoot" type="Node2D" parent="."]
 
 [node name="Canvas" type="Control" parent="EditorRoot"]
