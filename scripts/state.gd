@@ -1,28 +1,26 @@
 class_name State extends movement
 
-@export var state_name := "qo"
-const inputSymbols=["a","b","*"]
+
+
+var state_name : String
+var transition := {}
+var is_accepting := false
+
+@onready var inner_circle: ColorRect = $InnerCircle
+@onready var labelee: Label = $Label
+
 
 func _ready() -> void:
-	pass
+	labelee.text = state_name
+	self.name = state_name
 	
+	update_visual()
 
-#var state
-#var name
-#var state_links:Dictionary[string,State]={}
+#func set_state_name(new_name :String):
+	#state_name = new_name
+	#labelee.clip_text = str(new_name)
+	#self.name = new_name
 
-#func setUp(name,states:Dictionary):
-	#state_links=states
-	#self.name=name	
-	#
-#func sendTo(s:State):
-	#s.state=state
-	#
-#func compute():
-	#for pair in state_links:
-		#var char = pair
-		#
-	#
-#
-#func _process(delta: float) -> void:
-	#pass
+func update_visual():
+	if inner_circle:
+		inner_circle.visible = is_accepting
