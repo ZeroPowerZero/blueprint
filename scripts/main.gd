@@ -1,6 +1,7 @@
 extends Control
 
 @export var state_scene: PackedScene
+@export var transition_scene : PackedScene
 var state_count := 0
 var states := []
 var final_state = null
@@ -57,7 +58,39 @@ func _process(_delta: float) -> void:
 		canvas.position.x+= 10
 	if Input.is_action_pressed("Left"):
 		canvas.position.x-= 10
-
+		
+#func to get state just by name
+func get_state_by_name(name: String):
+	for s in states:
+		if s.state_name == name:
+			return s
+	return null
 
 func _on_add_transitio_button_pressed() -> void:
-	pass # Replace with function body.
+	var from_name = from_state.text.strip_edges()
+	var to_name = to_state.text.strip_edges()
+	var symbol = input_symbol.text.strip_edges()
+
+	if from_name == "" or to_name == "" or symbol == "":
+		print("Missing fields")
+		return
+	
+	var from_node = get_state_by_name(from_name)
+	var to_node = get_state_by_name(to_name)
+	
+	if from_node == null or to_node == null:
+		print("Invalid state name")
+		return
+
+	# 1️. Store transition in dictionary
+	from_node.transitions[symbol] = to_node
+
+	# 2️. Draw transition visually
+	draw_transition(from_node, to_node, symbol)
+
+func draw_transition(from_node, to_node, symbol):
+	var transition = transition_scene.instantiate()
+	
+	canvas.add_child(transition)
+	
+	transition.setup(from_node, to_node, symbol)

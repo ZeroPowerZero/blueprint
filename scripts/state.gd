@@ -3,7 +3,7 @@ class_name State extends movement
 
 
 var state_name : String
-var transition := {}
+var transitions := {}
 var is_accepting := false
 
 @onready var inner_circle: ColorRect = $InnerCircle
